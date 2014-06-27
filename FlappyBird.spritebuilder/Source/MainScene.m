@@ -214,6 +214,7 @@
         }
       }
     }
+  }
   // loop the ground
   for (CCNode *ground in _grounds) {
     // get the world position of the ground
