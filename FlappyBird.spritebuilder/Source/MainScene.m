@@ -167,6 +167,19 @@
 {
   _sinceTouch += delta;
   
+  
+  character.rotation = clampf(character.rotation, -30.f, 90.f);
+  
+  if (character.physicsBody.allowsRotation) {
+    float angularVelocity = clampf(character.physicsBody.angularVelocity, -2.f, 1.f);
+    character.physicsBody.angularVelocity = angularVelocity;
+  }
+  
+  if ((_sinceTouch > 0.5f)) {
+    [character.physicsBody applyAngularImpulse:-40000.f*delta];
+  }
+  
+  physicsNode.position = ccp(physicsNode.position.x - (character.physicsBody.velocity.x * delta), physicsNode.position.y);
   // loop the bushes
   for (CCNode *bush in _bushes) {
     // get the world position of the bush
@@ -201,20 +214,6 @@
         }
       }
     }
-  
-  character.rotation = clampf(character.rotation, -30.f, 90.f);
-  
-  if (character.physicsBody.allowsRotation) {
-    float angularVelocity = clampf(character.physicsBody.angularVelocity, -2.f, 1.f);
-    character.physicsBody.angularVelocity = angularVelocity;
-  }
-  
-  if ((_sinceTouch > 0.5f)) {
-    [character.physicsBody applyAngularImpulse:-40000.f*delta];
-  }
-  
-  physicsNode.position = ccp(physicsNode.position.x - (character.physicsBody.velocity.x * delta), physicsNode.position.y);
-  
   // loop the ground
   for (CCNode *ground in _grounds) {
     // get the world position of the ground
@@ -261,8 +260,6 @@
   }
   _parallaxBackground.position = ccp(_parallaxBackground.position.x - (character.physicsBody.velocity.x * delta), _parallaxBackground.position.y);
   
-
-  } 
 }
 
 -(BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair*)pair character:(CCSprite*)character level:(CCNode*)level {
