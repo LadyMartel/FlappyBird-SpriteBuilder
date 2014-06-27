@@ -27,7 +27,6 @@
   CCNode *_ground2;
   
   NSArray *_grounds;
-  
   NSTimeInterval _sinceTouch;
   
   NSMutableArray *_obstacles;
@@ -166,8 +165,6 @@
 - (void)update:(CCTime)delta
 {
   _sinceTouch += delta;
-  
-  
   character.rotation = clampf(character.rotation, -30.f, 90.f);
   
   if (character.physicsBody.allowsRotation) {
@@ -237,7 +234,6 @@
       if (!offScreenObstacles) {
         offScreenObstacles = [NSMutableArray array];
       }
-      obstacle.zOrder = 0;
       [offScreenObstacles addObject:obstacle];
     }
   }
