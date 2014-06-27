@@ -237,7 +237,7 @@
       if (!offScreenObstacles) {
         offScreenObstacles = [NSMutableArray array];
       }
-      obstacle.zOrder = 1;
+      obstacle.zOrder = 5;
       [offScreenObstacles addObject:obstacle];
     }
   }
